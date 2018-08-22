@@ -1,1 +1,1 @@
-run on browser : https://www.doctelladev.local/sites/base/developer/reactjs/index.php
+Go to index.php
