@@ -1,0 +1,32 @@
+#page-content {
+  text-align: center;
+}
+.item-home {
+  margin-bottom: 20px;
+}
+.item-home .title {
+  padding-bottom: 5px;
+}
+.icon-sort {
+  background: url(../images/ic-sort.png) no-repeat center center;
+  width: 12px;
+  height: 12px;
+  background-size: 100% auto;
+  display: inline-block;
+}
+.icon-sort.desc {
+	transform: rotate(180deg);
+}
+.demo-forms {
+  width: 200px;
+  margin: 20px auto;
+}
+.demo-forms .row {
+  margin-bottom: 10px;
+}
+.demo-forms .item-form {
+  width: 100%;
+}
+.list-member {
+  margin: 0 auto;
+}
