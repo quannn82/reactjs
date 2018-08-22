@@ -64,7 +64,7 @@ const user = {
         firstName: 'Quân',
         lastName: 'Nguyễn Như'
     },
-    note_1 = 'Lưu ý 1: Sử dụng dấu nháy kép cho chuỗi, dấu ngoặc nhọn cho biến hoặc biểu thức javascript';
+    note_1 = '1. function phải được khai báo trong constructor() hoặc viết trực tiếp trong constructor()';
 
 function getGreeting(user) {
   let text;
@@ -340,54 +340,46 @@ class FormDemo extends React.Component {
       userName: '',
       description: '',
       gender: "1",
-      listMulti: []
+      listMulti: [],
+      isCheck: false
     };
+    this.inputRef = React.createRef(); //Uncontrolled Components
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeDes = this.handleChangeDes.bind(this);
-    this.handleChangeGender = (event) => {
-      this.setState({gender: event.target.value});
-    }
-    this.handleChangeMulti = (e) => {
-      let options = e.target.options,
-          value = [];
-      for (var i = 0; i < options.length; i++) {
-        if (options[i].selected) {
-          value.push(options[i].value);
-        }
-      }
-      this.setState({listMulti: value});
-    }
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
   handleSubmit(event) {
     event.preventDefault();
     console.log('Submit Form !');
+    console.log(this.inputRef.current.value);
   }
-  handleChange(event) {
-    this.setState({userName: event.target.value});
-  }
-  handleChangeDes(event) {
-    this.setState({description: event.target.value});
+  handleInputChange(e) {
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   render() {
     return(
       <form className="demo-forms" onSubmit={this.handleSubmit}>
         <div className="row">
-            <input type="text" className="item-form" placeholder="Fullname" value={this.state.userName} onChange={this.handleChange} />
+            <input type="text" name="userName" className="item-form" placeholder="Fullname" value={this.state.userName} onChange={this.handleInputChange} />
         </div>
         <div className="row">
-          <textarea value={this.state.description} className="item-form" placeholder="Description" onChange={this.handleChangeDes} />
+          <textarea value={this.state.description} name="description" className="item-form" placeholder="Description" onChange={this.handleInputChange} />
         </div>
         <div className="row">
-          <select value={this.state.gender} onChange={this.handleChangeGender} >
+          <select value={this.state.gender} name="gender" onChange={this.handleInputChange} >
             <option value="1">Nam</option>
             <option value="2">Nữ</option>
           </select>
         </div>
         <div className="row">
-          <select multiple={true} value={this.state.listMulti} onChange={this.handleChangeMulti} >
+          <select multiple={true} name="listMulti" value={this.state.listMulti} onChange={this.handleInputChange} >
             <option value="Facebook">Facebook</option>
             <option value="Youtube">Youtube</option>
             <option value="Google">Google</option>
@@ -396,10 +388,91 @@ class FormDemo extends React.Component {
           </select>
         </div>
         <div className="row">
+          <input type="checkbox" name="isCheck" onChange={this.handleInputChange} checked={this.state.isCheck}/>
+        </div>
+        <div className="row">
+          <input type="text" ref={this.inputRef} />
+        </div>
+        <div className="row">
           <input type="submit" value="Submit" />
         </div>
 
       </form>
+    );
+  }
+}
+
+const scaleNames = {
+  c: 'Celsius',
+  f: 'Fahrenheit'
+};
+class TemperatureInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+    this.props.onTemperatureChange(e.target.value);
+  }
+  render() {
+    const temperature = this.props.temperature;
+    const scale = this.props.scale;
+    return (
+      <fieldset>
+        <legend>Enter temperature in {scaleNames[scale]}:</legend>
+        <input value={temperature}
+               onChange={this.handleChange} />
+      </fieldset>
+    );
+  }
+}
+function BoilingVerdict (props) {
+  if (props.celsius >= 100) {
+    return <p>The water would boil.</p>;
+  }
+  return <p>The water would not boil.</p>;
+}
+function toCelsius(fahrenheit) {
+  return (fahrenheit - 32) * 5 / 9;
+}
+function toFahrenheit(celsius) {
+  return (celsius * 9 / 5) + 32;
+}
+function tryConvert(temperature, convert) {
+  const input = parseFloat(temperature);
+  if (Number.isNaN(input)) {
+    return '';
+  }
+  const output = convert(input);
+  const rounded = Math.round(output * 1000) / 1000;
+  return rounded.toString();
+}
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+    this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+    this.state = {temperature: '', scale: 'c'};
+  }
+  handleCelsiusChange(temperature) {
+    this.setState({scale: 'c', temperature});
+  }
+
+  handleFahrenheitChange(temperature) {
+    this.setState({scale: 'f', temperature});
+  }
+  render() {
+    const scale = this.state.scale;
+    const temperature = this.state.temperature;
+    const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
+    const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+    return (
+      <div className="lifting-state">
+        <TemperatureInput scale="c" temperature={celsius} onTemperatureChange={this.handleCelsiusChange}/>
+        <TemperatureInput scale="f" temperature={fahrenheit} onTemperatureChange={this.handleFahrenheitChange}/>
+
+        <BoilingVerdict celsius={parseFloat(celsius)} />
+      </div>
     );
   }
 }
@@ -429,6 +502,11 @@ class MyApp extends React.Component {
         <div className="item-home">
           <div className="title">---------Forms----------</div>
           <FormDemo />
+        </div>
+        <div className="item-home">
+          <div className="title">---------Lifting State Up----------</div>
+          <Calculator />
+
         </div>
       </div>
     );
