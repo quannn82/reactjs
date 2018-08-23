@@ -476,6 +476,68 @@ class Calculator extends React.Component {
     );
   }
 }
+
+function CalBoil(props) {
+  if (props.temperature == '') return '';
+
+  if (props.temperature >= 100) {
+    return <p>Nhiệt độ này nước sẽ sôi</p>;
+  }
+  return <p>Nhiệt độ này nước không sôi</p>;
+}
+class InputTemper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+  handleInputChange(e) {
+    this.props.setTemperature(this.props.scale, e.target.value);
+  }
+  render() {
+    const scaleName = (this.props.scale == 'c') ? scaleNames.c : scaleNames.f;
+    return (
+      <fieldset className="inpTemera">
+        <legend>Nhập nhiệt độ {scaleName}: </legend>
+        <input type="text" value={this.props.temperature} onChange={this.handleInputChange} />
+      </fieldset>
+    );
+  }
+}
+class BoilTemperature extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      temperature: {
+        k: "c",
+        v: ''
+      }
+    }
+    this.setTemperature = this.setTemperature.bind(this);
+  }
+  setTemperature(k, temper) {
+    let temperature;
+    if (k == "c") {
+      temperature= {k: "c", v: temper};
+    } else {
+      temperature= {k: "k", v: temper};
+    }
+    this.setState({
+      temperature: temperature
+    });
+  }
+  render() {
+    const temperature = this.state.temperature;
+    const celsius = (this.state.temperature.k == 'k') ? tryConvert(temperature.v, toCelsius) : temperature.v;
+    const fahrenheit = (this.state.temperature.k == 'c') ? tryConvert(temperature.v, toFahrenheit) : temperature.v;
+    return (
+      <div className="boil-temperature">
+        <InputTemper scale= "c" temperature= {celsius} setTemperature={this.setTemperature} />
+        <InputTemper scale= "f" temperature= {fahrenheit} setTemperature={this.setTemperature} />
+        <CalBoil temperature={celsius}/>
+      </div>
+    );
+  }
+}
 class MyApp extends React.Component {
   render() {
     return (
@@ -506,6 +568,7 @@ class MyApp extends React.Component {
         <div className="item-home">
           <div className="title">---------Lifting State Up----------</div>
           <Calculator />
+          <BoilTemperature />
 
         </div>
       </div>
