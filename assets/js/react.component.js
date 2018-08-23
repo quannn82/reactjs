@@ -497,7 +497,7 @@ class InputTemper extends React.Component {
     const scaleName = (this.props.scale == 'c') ? scaleNames.c : scaleNames.f;
     return (
       <fieldset className="inpTemera">
-        <legend>Nhập nhiệt độ {scaleName}: </legend>
+        <legend>Enter {scaleName}: </legend>
         <input type="text" value={this.props.temperature} onChange={this.handleInputChange} />
       </fieldset>
     );
@@ -567,7 +567,6 @@ class MyApp extends React.Component {
         </div>
         <div className="item-home">
           <div className="title">---------Lifting State Up----------</div>
-          <Calculator />
           <BoilTemperature />
 
         </div>
