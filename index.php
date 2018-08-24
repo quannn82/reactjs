@@ -5,12 +5,12 @@
     <link href="assets/css/styles.css" rel="stylesheet" type="text/css"/>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="angular/angular.min.js" type="text/javascript"></script>
+    <!-- <script src="angular/angular.min.js" type="text/javascript"></script>
     <script src="angular/angular-ui.min.js" type="text/javascript"></script>
     <script src="angular/angular-animate.min.js" type="text/javascript"></script>
     <script src="angular/angular-aria.min.js" type="text/javascript"></script>
     <script src="angular/angular-messages.min.js" type="text/javascript"></script>
-    <script src="angular/material/angular-material.min.js" type="text/javascript"></script>
+    <script src="angular/material/angular-material.min.js" type="text/javascript"></script> -->
 
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
@@ -38,6 +38,6 @@
 
     <!-- Load our React component. -->
     <script type="text/babel" src="assets/js/react.component.js"></script>
-    <script src="controller/index.controller.js"></script>
+    <!-- <script src="controller/index.controller.js"></script> -->
 </body>
 </html>

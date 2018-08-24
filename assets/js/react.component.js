@@ -538,6 +538,145 @@ class BoilTemperature extends React.Component {
     );
   }
 }
+
+class CustomTextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    //this.textInput = React.createRef();
+    this.focusTextInput = this.focusTextInput.bind(this);
+  }
+  componentDidMount() {
+    //this.textInput.current.focusTextInput();
+  }
+  focusTextInput() {
+    this.props.inputRef.current.focus();
+    //console.log(this.textInput.current.value);
+  }
+  render() {
+    const refFan = React.createRef();
+    return(
+      <div>
+        <input type="text" ref={this.props.inputRef} />
+        <input type="button" value="Focus the text input" onClick={this.focusTextInput} />
+      </div>
+    );
+  }
+}
+// function CustomTextInput(props) {
+//   let textInput = React.createRef();
+//   function focusTextInput() {
+//     textInput.current.focus();
+//   }
+//   return(
+//       <div>
+//         <input type="text" ref={textInput} />
+//         <input type="button" value="Focus the text input" onClick={focusTextInput} />
+//       </div>
+//     );
+// }
+class AutoFocusTextInput  extends React.Component {
+  constructor(props) {
+    super(props);
+    this.textInput = React.createRef();
+  }
+  componentDidMount() {
+    //this.textInput.current.focusTextInput();
+    this.textInput.current.focus();
+  }
+  render() {
+    return (
+      <CustomTextInput inputRef={this.textInput} />
+    );
+  }
+}
+
+class OuterClickExample extends React.Component {
+  constructor() {
+    super();
+    this.toggleContainer = React.createRef();
+    this.state = {
+      name: '',
+      isOpen: false,
+      isOpen2: false
+    };
+    this.onClickHandler = this.onClickHandler.bind(this);
+    this.onClickHandler2 = this.onClickHandler2.bind(this);
+    this.onClickOutsideHandler = this.onClickOutsideHandler.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.onBlurHandler = this.onBlurHandler.bind(this);
+    this.onFocusHandler = this.onFocusHandler.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener('click', this.onClickOutsideHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.onClickOutsideHandler);
+  }
+  onClickHandler() {
+    this.setState(currentState => ({
+      isOpen: !currentState.isOpen
+    }));
+  }
+  onClickHandler2() {
+    this.setState(currentState => ({
+      isOpen2: !currentState.isOpen2
+    }));
+  }
+  handleInput(e) {
+    this.setState({name: e.target.value});
+  }
+  onClickOutsideHandler(e) {
+    if (this.state.isOpen2 && !this.toggleContainer.current.contains(e.target)) {
+      this.setState({ isOpen2: false });
+    }
+  }
+  // We close the popover on the next tick by using setTimeout.
+  // This is necessary because we need to first check if
+  // another child of the element has received focus as
+  // the blur event fires prior to the new focus event.
+  onBlurHandler() {console.log('Blur');
+    this.setState({
+      isOpen: false
+    });
+  }
+
+  // If a child receives focus, do not close the popover.
+  onFocusHandler() {console.log('Focus');
+    //clearTimeout(this.timeOutId);
+  }
+  render() {
+    return(
+      <div>
+        <div onBlur={this.onBlurHandler} onFocus={this.onFocusHandler} className="box-demo-1">
+          <input type="text" value={this.state.name} onChange={this.handleInput} /><br/>
+          <button onClick={this.onClickHandler} aria-haspopup="true" aria-expanded={this.state.isOpen}>Select an option</button>
+          {this.state.isOpen ? (
+            <ul className="toggle-box">
+              <li>Option 1</li>
+              <li>Option 2</li>
+              <li>Option 3</li>
+            </ul>
+          ) : null}
+        </div>
+        <button>Load the option</button><br/>
+        <button>Remove the option</button><br/>
+        <div className="box-demo-1" ref={this.toggleContainer}>
+          <button onClick={this.onClickHandler2}>Select the option 2</button>
+          {this.state.isOpen2 ? (
+            <ul className="toggle-box">
+              <li>Option 1</li>
+              <li>Option 2</li>
+              <li>Option 3</li>
+            </ul>
+          ) : null}
+        </div>
+        <p>Lưu ý: Linh hoạt sử dụng Refs với các sự kiện khác: onBlur, onFocus, ... </p>
+      </div>
+    );
+  }
+}
+
 class MyApp extends React.Component {
   render() {
     return (
@@ -568,6 +707,17 @@ class MyApp extends React.Component {
         <div className="item-home">
           <div className="title">---------Lifting State Up----------</div>
           <BoilTemperature />
+        </div>
+
+        <div className="advanced-content">
+          <h2 className="title">Advanced Guides</h2>
+          <h3>1. Refs and the DOM</h3>
+          <AutoFocusTextInput />
+          <h3>2. Accessibility</h3>
+          <h4>2.1. Mouse and pointer events</h4>
+          <OuterClickExample  />
+
+          <h3>3. Code-Splitting</h3><span><a href="assets/themes/demo-1.php">Demo</a></span>
 
         </div>
       </div>
