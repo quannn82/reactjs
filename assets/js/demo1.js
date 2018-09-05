@@ -8,5 +8,5 @@ class MyApp extends React.Component {
     );
   }
 }
-let domContainer = document.querySelector('#root');
-ReactDOM.render(<MyApp />, domContainer);
+
+ReactDOM.render(<MyApp />, document.querySelector('#root'));
