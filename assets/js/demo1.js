@@ -1,12 +1,35 @@
-'use strict';
-class MyApp extends React.Component {
+class Chosen extends React.Component {
+  componentDidMount() {
+    this.$el = $(this.el);
+    this.$el.chosen();
+  }
+
+  componentWillUnmount() {
+    this.$el.chosen('destroy');
+  }
+
   render() {
     return (
-      <div id="page-content">
-        Page router
+      <div>
+        <select className="Chosen-select" ref={el => this.el = el}>
+          {this.props.children}
+        </select>
       </div>
     );
   }
 }
 
-ReactDOM.render(<MyApp />, document.querySelector('#root'));
+function Example() {
+  return (
+    <Chosen>
+      <option>vanilla</option>
+      <option>chocolate</option>
+      <option>strawberry</option>
+    </Chosen>
+  );
+}
+
+ReactDOM.render(
+  <Example />,
+  document.getElementById('root')
+);
