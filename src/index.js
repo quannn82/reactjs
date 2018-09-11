@@ -1,3 +1,8 @@
+'use strict'
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 function log(_val) {
   console.log(_val);
 }
@@ -43,37 +48,6 @@ class CounterButton extends React.PureComponent { //React.Component
   }
 }
 
-class ListOfWords extends React.PureComponent {
-  render() {
-    return <div>{this.props.words.join(',')}</div>;
-  }
-}
-class WordAdder extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      words: ['marklar']
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    // This section is bad style and causes a bug
-    const words = this.state.words;
-    words.push('marklar');
-    this.setState({words: words});
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.handleClick}>Click</button>
-        <ListOfWords words={this.state.words} />
-      </div>
-    );
-  }
-}
-
 class App extends React.Component {
   render() {
     return (
@@ -82,12 +56,8 @@ class App extends React.Component {
         <p>---------------------------------</p>
         <CounterButton />
         <p>---------------------------------</p>
-        <WordAdder />
       </div>
     );
   };
 }
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />,document.getElementById('root'));

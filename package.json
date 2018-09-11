@@ -14,7 +14,9 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
