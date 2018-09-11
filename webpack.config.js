@@ -16,5 +16,21 @@ module.exports = {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [
+      {
+        test: /.jsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "babel-loader",
+            query: {
+              presets: ["es2015", "react"]
+            }
+          }
+        ]
+      }
+    ]
   }
 };
