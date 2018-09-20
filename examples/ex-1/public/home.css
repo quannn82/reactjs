@@ -1,0 +1,7 @@
+.album-images {
+
+}
+.album-images img {
+  height: 130px;
+  border: 1px solid red;
+}
