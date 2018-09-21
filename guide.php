@@ -52,5 +52,27 @@
         <ul>
           <li>Sử dụng để truyền dữ liệu từ cha vào con mà kon cần qua props</li>
         </ul>
+
+    <div class="">
+    Webpack
+    Là công cụ đóng gói file
+    npm install -g webpack
+    -g: chạy global, chạy như 1 ứng dụng trong máy, như npm hay node (sudo: mac)
+
+    React và ReactDOM
+    npm install react react-dom --save
+    --save để lưu vào file package.json
+
+    webpack.config.js
+    module.exports = {
+      entry: 'đường dẫn tên file file đầu vào',
+      output: {
+        path: __dirname,
+        filename: 'đường dẫn tên file sau khi đóng gói'
+      }
+    }
+
+    run: webpack
+    </div>
   </body>
 </html>

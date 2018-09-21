@@ -1,15 +1,64 @@
 
+var list;
 class Note extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      edit: false
+    }
+
+    this.deleteNote = this.deleteNote.bind(this);
+    this.editNote = this.editNote.bind(this);
+    this.saveNote = this.saveNote.bind(this);
+  }
+  deleteNote() {
+    $.post("/delNote", {id: this.props.id}, function(res) {
+      list.setState({
+        lists: res
+      });
+    });
+  }
+  editNote() {
+    this.state.edit = !this.state.edit;
+    this.setState(this.state);
+  }
+  saveNote() {
+    var id = this.props.id,
+        inpText = this.refs.inpText.value;
+    var that = this;
+    $.post("/editNote", {id: id, text: inpText}, function(res) {
+        list.setState({lists: res});
+        that.setState({
+          edit: !that.state.edit
+        })
+    });
+  }
   render() {
-    return (
-      <div className="item-note">{this.props.children}</div>
-    );
+    const state = this.state.edit;
+
+    if(state) {
+      return (
+        <div className="item-note">
+          <input type="text" ref="inpText" defaultValue={this.props.text} />
+          <button onClick={this.saveNote}>Save</button>
+          <button onClick={this.editNote}>Cancel</button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="item-note">
+          <span>{this.props.text}</span>
+          <button onClick={this.deleteNote}>Delete</button>
+          <button onClick={this.editNote}>Edit</button>
+        </div>
+      );
+    }
+
   }
 }
 function addDiv() {
   ReactDOM.render(<InputDiv />, document.getElementById("divAdd"))
 }
-var list;
 class List extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +81,7 @@ class List extends React.Component {
       <div id="divAdd"></div>
         <button onClick={addDiv}>Add</button>
         {this.state.lists.map((val, i)=> {
-          return <Note className="item-note" key={i}>{val}</Note>
+          return <Note id={i} className="item-note" key={i} text={val} />
         })}
       </div>
     );

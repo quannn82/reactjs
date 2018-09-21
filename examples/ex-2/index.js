@@ -21,3 +21,14 @@ app.post('/addNote', parser, function(req, res) {
   mang.push(newNote);
   res.send(mang);
 });
+app.post('/delNote', parser, function(req, res) {
+  var id = req.body.id;
+  mang.splice(id, 1);
+  res.send(mang);
+});
+app.post('/editNote', parser, function(req, res) {
+  var id = req.body.id,
+      text = req.body.text;
+  mang[id] = text;
+  res.send(mang);
+});
