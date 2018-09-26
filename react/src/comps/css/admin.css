@@ -1,0 +1,12 @@
+@font-face {
+  font-family: Roboto;
+  src:  url('../fonts/Roboto-Regular.ttf') format('ttf'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+body {
+  font-family: Roboto;
+}
+a {
+  text-decoration: none;
+}
