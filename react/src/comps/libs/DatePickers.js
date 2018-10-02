@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import moment from 'moment';
 
 const styles = theme => ({
   container: {
@@ -17,20 +18,14 @@ const styles = theme => ({
 
 function DatePickers(props) {
   const { classes } = props;
-
-  let _date = new Date(),
-      _year = _date.getFullYear(),
-      _month = _date.getMonth() + 1,
-      _day = _date.getDate(),
-      StringDate = _year + '-' + ((_month < 10) ? "0"+_month : _month) + '-' + _day;
-
   return (
     <form className={classes.container} noValidate>
       <TextField
         id="date"
         label="Enter date from"
         type="date"
-        defaultValue={StringDate}
+        value={props.value}
+        onChange={props.handleChange}        
         className={classes.textField}
         InputLabelProps={{
           shrink: true,

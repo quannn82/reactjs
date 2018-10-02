@@ -10,3 +10,17 @@ body {
 a {
   text-decoration: none;
 }
+.box-datepicker {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin-right: 20px;
+  margin-top: 14px;
+}
+.top-content {
+  display: flex;
+  justify-content: space-between;
+}
+.content {
+  min-height: 757px;
+}
