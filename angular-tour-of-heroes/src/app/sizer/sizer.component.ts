@@ -3,13 +3,16 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 @Component({
   selector: 'app-sizer',
   template: `
-  <div>
-    <button (click)="dec()" title="smaller">-</button>
-    <button (click)="inc()" title="bigger">+</button>
-    <label [style.font-size.px]="size">FontSize: {{size}}px</label>
-  </div>
+    <app-nav></app-nav>
+    <div>
+      <button (click)="dec()" title="smaller">-</button>
+      <button (click)="inc()" title="bigger">+</button>
+      <label [style.font-size.px]="size">FontSize: {{size}}px</label>
+    </div>
   `,
-  styleUrls: ['./sizer.component.css']
+  styleUrls: ['./sizer.component.css'],
+  // input: ['size'],
+  // output: ['sizeChange']
 })
 export class SizerComponent{
 

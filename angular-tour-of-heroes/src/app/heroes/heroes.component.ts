@@ -29,6 +29,12 @@ export class HeroesComponent implements OnInit {
         .subscribe(heroes => this.heroes = heroes);
   }
 
+  trackByHeroes(index: number, hero: Hero): number { return hero.id; }
+
+  getListHero(): void {
+    this.getHeroes();
+  }
+
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
@@ -37,6 +43,7 @@ export class HeroesComponent implements OnInit {
         this.heroes.push(hero);
       });
   }
+  
 
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
@@ -44,7 +51,10 @@ export class HeroesComponent implements OnInit {
   }
 
   deleteHero(hero: Hero): void {
-    console.log(1);
+    let objFind = {};
+    this.heroes = this.heroes.filter(h => h.id != hero.id);
+    this.selectedHero = this.heroes[0];
+    this.heroService.deleteHero(hero).subscribe();
   }
 
   handleHero(hero: Hero): void {

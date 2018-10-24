@@ -10,9 +10,15 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { SizerComponent } from './sizer/sizer.component';
+import { DemoComponent } from './comps/demo/demo.component';
+import { NavComponent } from './nav/nav.component';
+import { CompParentComponent } from './comps/comp-parent/comp-parent.component';
+import { CompChildComponent } from './comps/comp-child/comp-child.component';
+import { CardComponent } from './comps/card/card.component';
+import { LearnPipeComponent } from './comps/learn-pipe/learn-pipe.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,13 @@ import { SizerComponent } from './sizer/sizer.component';
     MessagesComponent,
     DashboardComponent,
     HeroSearchComponent,
-    SizerComponent
+    SizerComponent,
+    DemoComponent,
+    NavComponent,
+    CompParentComponent,
+    CompChildComponent,
+    CardComponent,
+    LearnPipeComponent
   ],
   imports: [
     BrowserModule,

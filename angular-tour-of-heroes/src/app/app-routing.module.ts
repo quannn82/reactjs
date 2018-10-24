@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeroesComponent }      from './heroes/heroes.component';
-import { DashboardComponent }      from './dashboard/dashboard.component';
-import { HeroDetailComponent }      from './hero-detail/hero-detail.component';
-import { SizerComponent }      from './sizer/sizer.component';
+import { HeroesComponent } from './heroes/heroes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { SizerComponent } from './sizer/sizer.component';
+import { DemoComponent } from './comps/demo/demo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
   { path: 'sizer', component: SizerComponent },
+  { path: 'demo', component: DemoComponent },
 ];
 
 @NgModule({
