@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { SizerComponent } from './sizer/sizer.component';
 import { DemoComponent } from './comps/demo/demo.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'detail/:id', component: HeroDetailComponent },
   { path: 'sizer', component: SizerComponent },
   { path: 'demo', component: DemoComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];
 
 @NgModule({

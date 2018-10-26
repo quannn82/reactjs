@@ -1,7 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
@@ -19,6 +19,8 @@ import { CompParentComponent } from './comps/comp-parent/comp-parent.component';
 import { CompChildComponent } from './comps/comp-child/comp-child.component';
 import { CardComponent } from './comps/card/card.component';
 import { LearnPipeComponent } from './comps/learn-pipe/learn-pipe.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -34,13 +36,15 @@ import { LearnPipeComponent } from './comps/learn-pipe/learn-pipe.component';
     CompParentComponent,
     CompChildComponent,
     CardComponent,
-    LearnPipeComponent
+    LearnPipeComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxStripeModule.forRoot('pk_test_2IQVE63OslUMUS09HquyOBly'),
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     )
