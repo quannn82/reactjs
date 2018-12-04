@@ -1,0 +1,59 @@
+.login-page {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item-page {
+  width: 500px;
+}
+.card-login > * {
+  width: 100%;
+}
+.item-page .logo {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.item-page .logo img {
+  width: 180px;
+}
+.content-item .card-login {
+  -webkit-box-shadow: 0px 0px 19px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 19px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 19px rgba(0,0,0,0.3);
+  padding: 30px;
+}
+.card-login .item-forgot {
+  position: absolute;
+  right: 0;
+  color: #303f9f;
+  top: 5px;
+}
+.bottom-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 66px;
+}
+.bottom-form #btnLoggin {
+  width: 177px;
+  height: 36px;
+  font-size: 16px;
+}
+.bottom-form .sign-up {
+  font-weight: bold;
+}
+.bottom-form .t {
+  margin: 0;
+}
+.check-keep-loggin {
+  font-size: 14px;
+  display: block;
+  margin-top: 15px;
+}
+.mat-progress-bar {
+  border-radius: 3px;
+}
+.login-page .hide {
+  opacity: 0;
+}

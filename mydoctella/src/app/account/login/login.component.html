@@ -1,4 +1,26 @@
-<p>
-  login works!
-</p>
-<button mat-button>Click me!</button>
+<div class="contaitner login-page">
+    <div class="item-page">
+      <div class="logo">
+        <a href=""><img src="./assets/images/logo.png" alt=""></a>
+      </div>
+      <div class="content-item">
+        <form [formGroup]="loginForm">
+          <mat-progress-bar mode="indeterminate" [ngClass]="{'hide': !showProgress}"></mat-progress-bar>
+          <mat-card class="card-login">
+              <mat-form-field>
+                <input matInput type="text" placeholder="Email or Mobile Number or User ID" required formControlName="username" id="username" />
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="password" placeholder="Password" required name="password" formControlName="password" id="password" />
+                <a href="" class="item-forgot">Forgot Password?</a>
+              </mat-form-field>
+              <mat-checkbox class="check-keep-loggin" color="primary" formControlName="keepLoggedin">Keep me logged in</mat-checkbox>
+              <div class="bottom-form">
+                <p class="t">Need an account? <a href="" class="sign-up">Sign Up</a></p>
+                <button mat-raised-button color="primary" type="submit" id="btnLoggin" (click)="login()">Log In</button>
+              </div>
+          </mat-card>
+        </form>
+      </div>
+    </div>
+</div>

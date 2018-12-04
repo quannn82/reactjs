@@ -9,18 +9,23 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './account/login/login.component';
 
+ import { HttpClientModule } from '@angular/common/http';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ActivitiesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    DemoMaterialModule
+    DemoMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
