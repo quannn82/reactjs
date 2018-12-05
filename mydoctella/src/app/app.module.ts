@@ -10,13 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './account/login/login.component';
 
  import { HttpClientModule } from '@angular/common/http';
-import { ActivitiesComponent } from './pages/activities/activities.component';
+import { ActivitiesComponent , DialogOverviewExampleDialog } from './pages/activities/activities.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    DialogOverviewExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -28,6 +29,7 @@ import { ActivitiesComponent } from './pages/activities/activities.component';
     DemoMaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogOverviewExampleDialog]
 })
 export class AppModule { }

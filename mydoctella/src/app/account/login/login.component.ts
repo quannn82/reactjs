@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { UserService} from '../../app-service/user.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
+import { sha256 } from 'js-sha256';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -43,16 +45,20 @@ export class LoginComponent implements OnInit {
 
     const dataForm = {
       account: this.loginForm.value.username,
-      pwd: 'b30da0a0e48ff2de1b06af3049e1822e5051c1184f47c581184075eb20dc9f3a',
+      pwd: sha256(this.loginForm.value.password),
       keep_logged_in: this.loginForm.value.keepLoggedin
     };
 
     // console.log(crypto.createHash('md5').update('abc').digest('hex'));
     this.showProgress = true;
     this.userService.login(dataForm).subscribe(res => {
-      console.log(res);
       this.showProgress = false;
-      this.router.navigate(['activities']);
+      this.click_1 = true;
+      if (res.code === '0') {
+        this.router.navigate(['activities']);
+      } else {
+        console.log(res.msg);
+      }
     });
   }
 
